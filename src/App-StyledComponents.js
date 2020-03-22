@@ -1,7 +1,21 @@
 //In this page we are maintaining the Class based component
 import React, {Component} from 'react';
 import './App.css';
+import Styled from 'styled-components';
 import Person from './Person/Person';
+
+const StyledButton = Styled.button `
+background-color: ${props => props.alt ? 'red': 'green'};
+color: white;
+font: inherit;
+border: 1px solid yellowgreen
+padding: 8px;
+cursor: pointer;
+&:hover {
+  background-color: ${props => props.alt ? 'yellowgreen': 'orange'};
+  color: black;
+}
+`;
 
 class App extends Component{
   state = {
@@ -46,6 +60,18 @@ class App extends Component{
   render(){
     let person = null;
 
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid yellowgreen',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'yellowgreen',
+    //     color: 'black'
+    //   }
+    // }
     if(this.state.showPerson){
       person = (
         <div>
@@ -59,6 +85,11 @@ class App extends Component{
           }
         </div>
       );
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'black',
+      //   color: 'white'
+      // }
     }
 
     const classes = [];
@@ -73,7 +104,9 @@ class App extends Component{
       <div className="App">
         <h1>React Application</h1>
         <p className={classes.join(' ')}>This is working for me</p>
-        <button onClick={this.TogglePersonHandler}>Toggle Persons</button>
+        <StyledButton alt={this.state.persons}
+        // style={style} 
+        onClick={this.TogglePersonHandler}>Toggle Persons</StyledButton>
         {person}
       </div>
     );
